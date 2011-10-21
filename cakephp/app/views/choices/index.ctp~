@@ -1,0 +1,13 @@
+<?php echo $html->css('choices/choices.css',null,array("inline"=>false)); ?>
+
+<p>Welcome to the bsw website</p>
+
+
+<?php 
+ 
+
+ // echo $html->image('main/bswMainBackgroundcroped.jpg', 
+		     array('alt' => 'main background image', 'id'=>'mainBackgroundImage')
+		    ); ?> 
+
+

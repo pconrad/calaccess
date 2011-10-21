@@ -1,0 +1,20 @@
+
+.storiesView { }
+
+#firstStory { width: 45%; display:inline;  float:left;
+	}
+
+.storyTitle{
+	}
+
+.sideStory{float:right; width:89%;
+	}
+
+.arrow { width:10%; display:inline; float:left;
+	}
+
+.storyAction { padding:1em; 
+	}
+
+#allTheStories {width: 45%;  display:inline; float:right; 
+	}
