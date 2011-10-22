@@ -1,0 +1,13 @@
+
+
+php_flag display_errors on
+
+# This says: we want the home page to be "choices"
+
+
+<IfModule mod_rewrite.c>
+   RewriteEngine on
+   RewriteRule    ^$ cakephp/app/webroot/choices  [L]
+   RewriteRule    (.*) cakephp/app/webroot/$1 [L]
+</IfModule>
+
