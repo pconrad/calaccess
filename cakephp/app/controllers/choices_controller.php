@@ -13,7 +13,7 @@ class ChoicesController extends AppController {
   function index() {
     $this->layout = 'main'; // use main.ctp from view/layouts instead of the default.ctp
 
-    $this->set('title_for_layout', 'Main BSW Page'); 
+    $this->set('title_for_layout', 'Main CalAccess Page'); 
     // in 1.2 this was $this->pageTitle = 'Main BSW Page'; 
 
   }

@@ -1,6 +1,6 @@
 <?php echo $html->css('logins/logins.css',null,array("inline"=>false)); ?>
 
-<p>Welcome to the bsw website</p>
+<p>Welcome to the big silly website</p>
 
 
 

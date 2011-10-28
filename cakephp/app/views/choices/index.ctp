@@ -1,6 +1,6 @@
 <?php echo $html->css('choices/choices.css',null,array("inline"=>false)); ?>
 
-<p>Welcome to the bsw website</p>
+<p>Welcome to the CalAccess website</p>
 <?php
 
  if($this->Session->read("loggedIn")) {
