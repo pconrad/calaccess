@@ -22,13 +22,13 @@
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php __('CakePHP: the rapid development php framework:'); ?>
+		<?php __('CalAccess: So Awesome.'); ?>
 		<?php echo $title_for_layout; ?>
 	</title>
 	<?php
 		echo $this->Html->meta('icon');
 
-		echo $this->Html->css('cake.bsw');
+		echo $this->Html->css('cake.calaccess');
 
 		echo $scripts_for_layout;
 	?>
