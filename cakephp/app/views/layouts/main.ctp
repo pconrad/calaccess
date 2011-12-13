@@ -22,7 +22,7 @@
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php __('CalAccess: So Awesome.'); ?>
+		<?php __('CalAccess'); ?>
 		<?php echo $title_for_layout; ?>
 	</title>
 	<?php
@@ -40,16 +40,16 @@
 
   if ( $this -> Session -> read("loggedIn")) {
      echo "Logged in as: " . $this -> Session -> read("user") . "<br />" . 
-             $this->Html->link('Logout',array('controller' => 'logins', 'action' => 'logout'));
+             $this->Html->link('Logout',array('controller' => 'users', 'action' => 'logout'));
   } else {
-    echo $this->Html->link('Login',array('controller' => 'logins'));
+    echo $this->Html->link('Login',array('controller' => 'users'));
   }
 ?>
 
 	        </div>
 	
 		<div id="header">
-			<h1> Branching Story Wiki: Main Page
+			<h1><a href="users">CalAccess</a>
 <!-- <?php echo $this->Html->link(__('CakePHP: the rapid development php framework', true), 'http://cakephp.org'); ?> -->
 </h1>
 		</div>

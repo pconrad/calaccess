@@ -42,9 +42,9 @@
 <body>
 	<div id="container">
 		<div id="header">
-			<h1><div id="theRight"><a href="https://foo.cs.ucsb.edu/hamstra/cakephp/users">Logout(User Name)</a></div>
-			    <a href="https://foo.cs.ucsb.edu/hamstra/cakephp/posts">View All</a>&nbsp|&nbsp
-			    <a href="https://foo.cs.ucsb.edu/hamstra/cakephp/widgets">Select Event</a>
+			<h1><div id="theRight"><a href="">Logout(User Name)</a></div>
+			    <a href="">View All</a>&nbsp|&nbsp
+			    <a href="">Select Event</a>
 			    
 			</h1>
 		</div>
