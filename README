@@ -1,0 +1,17 @@
+For now (Dec 13 2011), 
+
+Hardcoded in app/controllers/users_controller.php:
+    thefile is the file that stores the list of administrators on disk
+    $thefile = file("/local/home/dab/public_html/calaccess/cakephp/app/administrators.txt");
+    
+    
+src directory in cakephp/app comes from http://code.google.com/p/google-api-php-client
+
+ALL YOUR ANSWERS FOR GCAL API ACCESS ARE HERE:
+http://code.google.com/apis/calendar/v3/using.html
+
+
+Steps to victory:
+
+1. You need to create the file: cakephp/app/administrators.txt (used in app/controllers/users_controller.php)
+2. You need to rename app/src/SAMPLE_config.php to config.php and insert the appropriate keys/values from your google api console.
