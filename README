@@ -15,3 +15,6 @@ Steps to victory:
 
 1. You need to create the file: cakephp/app/administrators.txt (used in app/controllers/users_controller.php)
 2. You need to rename app/src/SAMPLE_config.php to config.php and insert the appropriate keys/values from your google api console.
+3. make sure app/cal_tmp is writable by the web server (run setACLs script)
+
+note: app/cal_tmp/refresh_token.txt needs to be created as an empty file first.

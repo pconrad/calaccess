@@ -9,6 +9,7 @@ class UsersController extends AppController {
   var $components = array('ldapauth');
   // You can continue to just add "helpers" into the array--e.g. if there are helpers Foo, Bar, Fum
   // make the array:
+  var $refresh_token_file = "/local/home/dab/public_html/calaccess/cakephp/app/cal_tmp/refresh_token.txt";
 
   // var $helpers = array('Javascript', 'Html', 'Foo', 'Bar', 'Fum');
   
@@ -24,6 +25,17 @@ class UsersController extends AppController {
 	  {
 		$this -> Session -> write("loggedIn", true);
 		$this -> Session -> write("user", $this->data['Users']['uid']);
+		
+		$encoded_token = file_get_contents($this->refresh_token_file);
+		if($encoded_token !== FALSE && $encoded_token != ""){//file doesn't exist, must reauthenticate manually
+		  $_SESSION['oauth_access_token'] = json_decode($encoded_token);
+		}
+	  if(isset($_SESSION['oauth_access_token'])){
+		$this->set('session_val', $_SESSION['oauth_access_token']);
+	  }
+	  else {
+		$this->set('session_val',"NOT SET");
+	  }
 		$this->Redirect("index");
 	  }
 	  else
@@ -42,6 +54,11 @@ class UsersController extends AppController {
   function index(){
 	$this->layout = 'main'; // use main.ctp from view/layouts instead of the default.ctp
     $this->set('title_for_layout', 'Index');
+	if(isset($_SESSION['oauth_access_token'])){
+	  $this->set('session_val', $_SESSION['oauth_access_token']);
+	} else {
+	  $this->set('session_val',"NOT SET");
+	}
 	
 	if($this->Session -> read("loggedIn") == false) $this->redirect(array('action'=>'login'));
 	else{
@@ -61,6 +78,7 @@ class UsersController extends AppController {
   }
   function oauth_and_test(){	                                                                                                                          
 	//session_start();
+	
 	$this->layout = 'main'; // use main.ctp from view/layouts instead of the default.ctp
     $this->set('title_for_layout', 'Oauth And Test :D');
 
@@ -87,12 +105,44 @@ class UsersController extends AppController {
 		$apiClient->setUseObjects(true);
 		$service = new apiCalendarService($apiClient);
 		
+		
 		if (isset($_SESSION['oauth_access_token'])) {
 		  $apiClient->setAccessToken($_SESSION['oauth_access_token']);
-		} else {
-		  $token = $apiClient->authenticate();
-		  $_SESSION['oauth_access_token'] = $token;
 		}
+		else {
+		  $apiClient->setAccessToken($apiClient->authenticate());
+		}
+		$_SESSION['oauth_access_token'] = $apiClient->getAccessToken();
+
+		/*if (isset($_SESSION['oauth_access_token'])) {
+		  $apiClient->setAccessToken($_SESSION['oauth_access_token']);
+		  $this->set('session_val', $_SESSION['oauth_access_token']);
+		}
+		
+		else {
+		  //if auth code exists in file on disk, use it to request a new token without reauthenticating:
+		  //else, must manually authenticate, such as during first time use
+		  
+		  //$encoded_token = file_get_contents($refresh_token_file); 
+		  if($encoded_token === FALSE || $encoded_token == ""){//file doesn't exist, must reauthenticate manually
+			$token = $apiClient->authenticate();
+			
+			$apiClient->setAccessToken($token);
+			
+			//now write to file for next time
+			//$encoded_token = json_encode($token);
+			//file_put_contents($refresh_token_file, $encoded_token);
+			//write that to file
+		  }
+		  else{ //got from file
+			$apiClient->setAccessToken($encoded_token);
+		  }
+		}
+		
+		$_SESSION['oauth_access_token'] = $apiClient->getAccessToken();
+		
+		*/
+		
 		
 		$events = $service->events->listEvents('primary');
 		
@@ -108,7 +158,16 @@ class UsersController extends AppController {
 		  } else {
 			break;
 		  }
-		 }
+		}
+		$token = $_SESSION['oauth_access_token'] = $apiClient->getAccessToken();
+		$encoded_token = json_encode($token);
+		file_put_contents($this->refresh_token_file, $encoded_token);
+		if(isset($_SESSION['oauth_access_token'])){
+		  $this->set('session_val', $_SESSION['oauth_access_token']);
+		  }
+		else {
+		$this->set('session_val',"NOT SET");
+	  }
 	  }
 	}
 	
